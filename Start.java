@@ -2,7 +2,9 @@ import java.util.Scanner;
 
 public class Start {
     public static void main(String[] args) {
-        String name, id, designation, department;
+        String name, id = null;
+        String designation = null;
+        String department = null;
         double salary;
         Scanner input = new Scanner(System.in);
         Employee e = new Employee("101", "Abdul", "Manager", 12000, "IT");
@@ -18,11 +20,12 @@ public class Start {
         Developer d = new Developer(ems);
         String s;
 
-        do {
+        while (true) {
             int type;
             System.out.println(
-                    " 1 for addEmployee.\n 2 for removeEmployee.\n 3 for searchEmployee.\n 4 for updateEmployeeDetails.\n 5 for Create a manager team.\n 6 for add developer in manager team. \n 7 for remove developer from the team.");
-            System.out.println(" 8 for developer manage project. \n 9 for remove project from developer project list.");
+                    " Select 1 for add Employee.\n Select 2 for remove Employee.\n Select 3 for search Employee.\n Select 4 for update EmployeeDetails.\n Select 5 for Create a manager team.\n Select 6 for add developer in manager team. \n Select 7 for remove developer from the team.");
+            System.out.println(
+                    " Select 8 for developer manage project. \n Select 9 for remove project from developer project list.\n Select 0 for exit from the program.");
             type = input.nextInt();
             input.nextLine();
 
@@ -30,15 +33,58 @@ public class Start {
                 case 1:
                     System.out.println("Enter employee name ");
                     name = input.nextLine();
-                    System.out.println("Enter employee id ");
-                    id = input.nextLine();
-                    System.out.println("Enter employee designation ");
-                    designation = input.nextLine();
+
+                    while (true) {
+                        System.out.println("Enter employee id number ");
+                        String id_num = input.nextLine();
+                        Employee empl = ems.idChecking(id_num);
+                        if (empl == null) {
+                            id = id_num;
+                            break;
+                        } else {
+                            System.out.println("This id is already exists.Please enter id number again.");
+                        }
+                    }
+
+                    System.out.println("Select employee designation.Select 1 for Manager and 2 for Developer. ");
+                    int select = input.nextInt();
+
+                    switch (select) {
+                        case 1:
+                            designation = " Manager";
+                            break;
+                        case 2:
+                            designation = " Developer ";
+
+                            break;
+                        default:
+                            System.out.println("No designation is select.");
+
+                    }
+                    input.nextLine();
+
                     System.out.println("Enter employee salary ");
                     salary = input.nextDouble();
                     input.nextLine();
-                    System.out.println("Enter employee department ");
-                    department = input.nextLine();
+                    System.out.println(
+                            "Select employee designation.Select 1 for It , 2 for Web and 3 for Cyber and Security ");
+                    int se = input.nextInt();
+
+                    switch (se) {
+                        case 1:
+                            department = " It ";
+                            break;
+                        case 2:
+                            department = " Web ";
+                            break;
+                        case 3:
+                            department = " Cyber and Security ";
+                            break;
+                        default:
+                            System.out.println("No department is select.");
+
+                    }
+                    input.nextLine();
 
                     Employee e4 = new Employee(id, name, designation, salary, department);
                     ems.addEmployee(e4);
@@ -52,23 +98,31 @@ public class Start {
                     ems.displayEmployeeDetails();
                     break;
                 case 3:
+                    System.out.println("Enter employee name ");
+                    name = input.nextLine();
+
                     System.out.println("Enter employee id ");
                     id = input.nextLine();
-                    Employee emp = ems.searchEmployeeById(id);
+                    Employee emp = ems.searchEmployeeById(name, id);
                     if (emp != null) {
                         emp.displayDetails();
                     }
                     break;
                 case 4:
+                    System.out.println("Enter employee name ");
+                    name = input.nextLine();
+
                     System.out.println("Enter employee id ");
                     id = input.nextLine();
-                    ems.updateEmployeeDetails(id);
+                    ems.updateEmployeeDetails(name, id);
                     ems.displayEmployeeDetails();
                     break;
                 case 5:
+                    System.out.println("Enter employee name ");
+                    name = input.nextLine();
                     System.out.println("Enter your manager id: ");
                     id = input.nextLine();
-                    m.setManagerId(id);
+                    m.setManagerId(name, id);
                     break;
 
                 case 6:
@@ -76,9 +130,11 @@ public class Start {
                     int n = input.nextInt();
                     input.nextLine();
                     for (int i = 0; i < n; i++) {
+                        System.out.println("Enter employee name ");
+                        name = input.nextLine();
                         System.out.println("Enter your Developer id: ");
                         id = input.nextLine();
-                        m.addEmployee(id);
+                        m.addEmployee(name, id);
                     }
                     m.displayDetails();
                     break;
@@ -89,9 +145,11 @@ public class Start {
                     m.displayDetails();
                     break;
                 case 8:
+                    System.out.println("Enter employee name ");
+                    name = input.nextLine();
                     System.out.println("Enter the developer id: ");
                     id = input.nextLine();
-                    d.setDeveloperId(id);
+                    d.setDeveloperId(name, id);
                     System.out.println("Enter Number of project you want to add: ");
                     int num = input.nextInt();
                     input.nextLine();
@@ -111,17 +169,15 @@ public class Start {
                     d.displayDetails();
                     break;
 
+                case 0:
+                    input.close();
+                    return;
+
                 default:
                     System.out.println("Wrong input.");
 
             }
-            System.out.println("If you want to continue type y or Y");
-            s = input.nextLine();
-            System.out.println();
-
-        } while ("y".equals(s) || "Y".equals(s));
-        input.close();
-
+        }
     }
 
 }

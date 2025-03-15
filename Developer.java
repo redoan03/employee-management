@@ -12,8 +12,8 @@ public class Developer extends Employee {
         this.ems = ems;
     }
 
-    public void setDeveloperId(String id) {
-        Employee e = ems.searchEmployeeById(id);
+    public void setDeveloperId(String name, String id) {
+        Employee e = ems.searchEmployeeById(name, id);
         if (e != null) {
             this.developer = e;
         } else {

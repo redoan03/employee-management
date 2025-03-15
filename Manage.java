@@ -16,8 +16,8 @@ public class Manage extends Employee {
         this.ems = ems;
     }
 
-    public void setManagerId(String id) {
-        Employee e = ems.searchEmployeeById(id);
+    public void setManagerId(String name, String id) {
+        Employee e = ems.searchEmployeeById(name, id);
         if ("Manager".equals(e.getDesignation())) {
             this.manager = e;
             System.out.println("Your team are created.Now add developer.");
@@ -26,12 +26,12 @@ public class Manage extends Employee {
         }
     }
 
-    public void addEmployee(String id) {
-        Employee e = ems.searchEmployeeById(id);
+    public void addEmployee(String name, String id) {
+        Employee e = ems.searchEmployeeById(name, id);
         if (e != null) {
             team.add(e);
         } else {
-            System.out.println("This " + id + " number developer not found!");
+            System.out.println("This " + name + " and " + id + " number developer not found!");
         }
     }
 
