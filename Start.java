@@ -21,16 +21,15 @@ public class Start {
         String s;
 
         while (true) {
-            int type;
+            String type;
             System.out.println(
                     " Select 1 for add Employee.\n Select 2 for remove Employee.\n Select 3 for search Employee.\n Select 4 for update EmployeeDetails.\n Select 5 for Create a manager team.\n Select 6 for add developer in manager team. \n Select 7 for remove developer from the team.");
             System.out.println(
                     " Select 8 for developer manage project. \n Select 9 for remove project from developer project list.\n Select 0 for exit from the program.");
-            type = input.nextInt();
-            input.nextLine();
+            type = input.nextLine();
 
             switch (type) {
-                case 1:
+                case "1":
                     System.out.println("Enter employee name ");
                     name = input.nextLine();
 
@@ -46,58 +45,70 @@ public class Start {
                         }
                     }
 
-                    System.out.println("Select employee designation.Select 1 for Manager and 2 for Developer. ");
-                    int select = input.nextInt();
+                    while (true) {
+                        System.out.println("Select employee designation.Select 1 for Manager and 2 for Developer. ");
+                        String select = input.nextLine();
 
-                    switch (select) {
-                        case 1:
-                            designation = " Manager";
+                        switch (select) {
+                            case "1":
+                                designation = " Manager";
+                                break;
+                            case "2":
+                                designation = " Developer ";
+                                break;
+                            default:
+                                System.out.println("No designation is select.");
+
+                        }
+                        if (designation != null) {
                             break;
-                        case 2:
-                            designation = " Developer ";
-
-                            break;
-                        default:
-                            System.out.println("No designation is select.");
-
+                        } else {
+                            System.out.println("Select designation aging.");
+                        }
                     }
-                    input.nextLine();
 
                     System.out.println("Enter employee salary ");
                     salary = input.nextDouble();
                     input.nextLine();
-                    System.out.println(
-                            "Select employee designation.Select 1 for It , 2 for Web and 3 for Cyber and Security ");
-                    int se = input.nextInt();
 
-                    switch (se) {
-                        case 1:
-                            department = " It ";
-                            break;
-                        case 2:
-                            department = " Web ";
-                            break;
-                        case 3:
-                            department = " Cyber and Security ";
-                            break;
-                        default:
-                            System.out.println("No department is select.");
+                    while (true) {
+                        System.out.println(
+                                "Select employee designation.Select 1 for It , 2 for Web and 3 for Cyber and Security ");
+                        String se = input.nextLine();
 
+                        switch (se) {
+                            case "1":
+                                department = " It ";
+                                break;
+                            case "2":
+                                department = " Web ";
+                                break;
+                            case "3":
+                                department = " Cyber and Security ";
+                                break;
+                            default:
+                                System.out.println("No department is select.");
+
+                        }
+                        if (department != null) {
+                            break;
+                        } else {
+                            System.out.println("Select department aging.");
+                        }
                     }
-                    input.nextLine();
 
                     Employee e4 = new Employee(id, name, designation, salary, department);
                     ems.addEmployee(e4);
                     ems.displayEmployeeDetails();
                     break;
 
-                case 2:
+                case "2":
                     System.out.println("Enter employee id ");
                     id = input.nextLine();
                     ems.removeEmployee(id);
                     ems.displayEmployeeDetails();
                     break;
-                case 3:
+                case "3":
                     System.out.println("Enter employee name ");
                     name = input.nextLine();
 
@@ -108,7 +119,7 @@ public class Start {
                         emp.displayDetails();
                     }
                     break;
-                case 4:
+                case "4":
                     System.out.println("Enter employee name ");
                     name = input.nextLine();
 
@@ -117,7 +128,7 @@ public class Start {
                     ems.updateEmployeeDetails(name, id);
                     ems.displayEmployeeDetails();
                     break;
-                case 5:
+                case "5":
                     System.out.println("Enter employee name ");
                     name = input.nextLine();
                     System.out.println("Enter your manager id: ");
@@ -125,7 +136,7 @@ public class Start {
                     m.setManagerId(name, id);
                     break;
 
-                case 6:
+                case "6":
                     System.out.println("Enter Number of employee you want to add: ");
                     int n = input.nextInt();
                     input.nextLine();
@@ -138,13 +149,13 @@ public class Start {
                     }
                     m.displayDetails();
                     break;
-                case 7:
+                case "7":
                     System.out.println("Enter the developer id: ");
                     id = input.nextLine();
                     m.removeEmployee(id);
                     m.displayDetails();
                     break;
-                case 8:
+                case "8":
                     System.out.println("Enter employee name ");
                     name = input.nextLine();
                     System.out.println("Enter the developer id: ");
@@ -162,14 +173,14 @@ public class Start {
                     d.displayDetails();
                     break;
 
-                case 9:
+                case "9":
                     System.out.println("Enter the project name: ");
                     String project = input.nextLine();
                     d.removeProject(project);
                     d.displayDetails();
                     break;
 
-                case 0:
+                case "0":
                     input.close();
                     return;
 
